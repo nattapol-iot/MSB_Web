@@ -13,7 +13,7 @@ export function Logo({
 
   return (
     <a
-      href="#home"
+      href="/"
       className={`inline-flex items-center ${variant === "dark" ? "rounded-xl bg-white/95 p-1.5" : ""}`}
       aria-label="MSB Smart Solutions home"
     >

@@ -7,6 +7,7 @@ const linkGroups = [
     links: [
       { label: "Home", href: "/#home" },
       { label: "Solutions", href: "/#solutions" },
+      { label: "News", href: "/news" },
       { label: "Register", href: "/register" },
       { label: "Contact", href: "/#contact" },
     ],
@@ -14,11 +15,11 @@ const linkGroups = [
   {
     title: "Solutions",
     links: [
-      { label: "WMS", href: "#wms" },
-      { label: "WCS", href: "#wcs" },
-      { label: "Traceability", href: "#traceability" },
-      { label: "IIoT", href: "#iiot" },
-      { label: "BMS", href: "#bms" },
+      { label: "WMS", href: "/#wms" },
+      { label: "WCS", href: "/#wcs" },
+      { label: "Traceability", href: "/#traceability" },
+      { label: "IIoT", href: "/#iiot" },
+      { label: "BMS", href: "/#bms" },
     ],
   },
 ];

@@ -5,14 +5,15 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import { Logo } from "./Logo";
 
 const NAV = [
-  { label: "Home", href: "#home" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "WMS", href: "#wms" },
-  { label: "WCS", href: "#wcs" },
-  { label: "Traceability", href: "#traceability" },
-  { label: "IIoT", href: "#iiot" },
-  { label: "BMS", href: "#bms" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/#home" },
+  { label: "Solutions", href: "/#solutions" },
+  { label: "WMS", href: "/#wms" },
+  { label: "WCS", href: "/#wcs" },
+  { label: "Traceability", href: "/#traceability" },
+  { label: "IIoT", href: "/#iiot" },
+  { label: "BMS", href: "/#bms" },
+  { label: "News", href: "/news" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export function Header() {

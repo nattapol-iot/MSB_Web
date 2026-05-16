@@ -14,6 +14,7 @@ import {
   ArrowRight,
   Loader2,
   MessageSquare,
+  ShieldCheck,
 } from "lucide-react";
 import { solutions } from "@/data/solutions";
 
@@ -131,16 +132,44 @@ export function RegisterForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="card-base !p-6 sm:!p-8">
-      {error && (
-        <div className="mb-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-          {error}
+    <form onSubmit={onSubmit} className="overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-soft">
+      {/* Form header */}
+      <div className="relative overflow-hidden border-b border-navy-100 bg-gradient-to-br from-navy-900 via-brand-blue to-brand-cyan p-6 text-white sm:p-7">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.18]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.7) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.7) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+            maskImage:
+              "radial-gradient(ellipse at top right, black 30%, transparent 80%)",
+          }}
+        />
+        <div className="relative">
+          <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/75">
+            Get Started
+          </div>
+          <h2 className="mt-1 text-2xl font-extrabold tracking-tight">
+            Tell us about you
+          </h2>
+          <p className="mt-1.5 text-sm text-white/80">
+            ใช้เวลาประมาณ 2 นาที — ทีมงานติดต่อกลับภายใน 1 วันทำการ
+          </p>
         </div>
-      )}
+      </div>
 
-      {/* Personal & company */}
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="space-y-7 p-6 sm:p-8">
+        {error && (
+          <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+            {error}
+          </div>
+        )}
+
+        {/* Section: Personal */}
+        <SectionHeader number={1} title="Your details" />
+        <div className="grid gap-4 sm:grid-cols-2">
         <Field
           label="Full Name"
           required
@@ -197,108 +226,142 @@ export function RegisterForm() {
         />
       </div>
 
-      {/* Interests */}
-      <div className="mt-6">
-        <FieldLabel>Solutions of interest</FieldLabel>
-        <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-          {solutions.map((s) => {
-            const checked = data.interests.includes(s.id);
-            const Icon = s.icon;
-            return (
-              <label
-                key={s.id}
-                className={`flex cursor-pointer items-center gap-2 rounded-xl border px-3 py-2.5 transition ${
-                  checked
-                    ? "border-brand-blue bg-gradient-to-br from-brand-blue/5 to-brand-cyan/5"
-                    : "border-navy-100 bg-white hover:border-brand-blue/40"
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  className="sr-only"
-                  checked={checked}
-                  onChange={() => toggleInterest(s.id)}
-                />
-                <span
-                  className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${s.accent} text-white`}
-                >
-                  <Icon className="h-3.5 w-3.5" strokeWidth={2.4} />
-                </span>
-                <span className="text-[12px] font-semibold text-navy-800">
-                  {s.title}
-                </span>
-                <span
-                  className={`ml-auto inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ${
+        {/* Section: Interests */}
+        <div>
+          <SectionHeader number={2} title="Solutions of interest" subtitle="เลือกได้มากกว่า 1" />
+          <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {solutions.map((s) => {
+              const checked = data.interests.includes(s.id);
+              const Icon = s.icon;
+              return (
+                <label
+                  key={s.id}
+                  className={`flex h-[60px] cursor-pointer items-center gap-2.5 rounded-xl border px-3 transition ${
                     checked
-                      ? "border-brand-blue bg-brand-blue text-white"
-                      : "border-navy-200"
+                      ? "border-brand-blue bg-gradient-to-br from-brand-blue/5 to-brand-cyan/5 shadow-card"
+                      : "border-navy-100 bg-white hover:border-brand-blue/40"
                   }`}
                 >
-                  {checked && (
-                    <CheckCircle2 className="h-3 w-3" strokeWidth={3} />
-                  )}
-                </span>
-              </label>
-            );
-          })}
+                  <input
+                    type="checkbox"
+                    className="sr-only"
+                    checked={checked}
+                    onChange={() => toggleInterest(s.id)}
+                  />
+                  <span
+                    className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${s.accent} text-white shadow-sm`}
+                  >
+                    <Icon className="h-4 w-4" strokeWidth={2.4} />
+                  </span>
+                  <span className="flex-1 text-[12px] font-semibold leading-tight text-navy-800">
+                    {s.title}
+                  </span>
+                  <span
+                    className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition ${
+                      checked
+                        ? "border-brand-blue bg-brand-blue text-white"
+                        : "border-navy-200"
+                    }`}
+                  >
+                    {checked && <CheckCircle2 className="h-3 w-3" strokeWidth={3} />}
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Section: Message */}
+        <div>
+          <SectionHeader number={3} title="Project context" subtitle="ทางเลือก" />
+          <FieldLabel>
+            <MessageSquare className="h-3.5 w-3.5" />
+            Tell us about your project
+          </FieldLabel>
+          <textarea
+            value={data.message}
+            onChange={(e) => update("message", e.target.value)}
+            rows={4}
+            placeholder="What problems are you trying to solve? What systems do you need to connect?"
+            className="mt-2 w-full rounded-xl border border-navy-100 bg-white px-4 py-3 text-sm text-navy-800 outline-none transition placeholder:text-navy-700/40 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15"
+          />
+        </div>
+
+        {/* Consent */}
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-blue-100 bg-blue-50/60 p-3">
+          <input
+            type="checkbox"
+            required
+            checked={data.consent}
+            onChange={(e) => update("consent", e.target.checked)}
+            className="mt-0.5 h-4 w-4 shrink-0 rounded border-navy-200 text-brand-blue focus:ring-brand-blue"
+          />
+          <span className="text-xs leading-relaxed text-navy-700/80">
+            ฉันยินยอมให้ MSB Smart Solutions ติดต่อกลับและประมวลผลข้อมูลตามที่ระบุไว้ใน
+            <a href="#" className="font-semibold text-brand-blue hover:underline">
+              {" "}
+              Privacy Policy
+            </a>
+          </span>
+        </label>
+
+        {/* Submit */}
+        <div className="flex flex-col gap-3 border-t border-navy-100 pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-navy-700/60">
+            <ShieldCheck className="-mt-0.5 mr-1 inline h-3.5 w-3.5 text-brand-blue" />
+            Your information is encrypted and used only for sales follow-up.
+          </p>
+          <button
+            type="submit"
+            disabled={status === "loading" || !data.consent}
+            className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          >
+            {status === "loading" ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Submitting…
+              </>
+            ) : (
+              <>
+                Submit registration
+                <ArrowRight className="h-4 w-4" />
+              </>
+            )}
+          </button>
         </div>
       </div>
-
-      {/* Message */}
-      <div className="mt-6">
-        <FieldLabel>
-          <MessageSquare className="h-3.5 w-3.5" />
-          Tell us about your project
-        </FieldLabel>
-        <textarea
-          value={data.message}
-          onChange={(e) => update("message", e.target.value)}
-          rows={4}
-          placeholder="What problems are you trying to solve?"
-          className="mt-2 w-full rounded-xl border border-navy-100 bg-white px-4 py-3 text-sm text-navy-800 outline-none transition placeholder:text-navy-700/40 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15"
-        />
-      </div>
-
-      {/* Consent */}
-      <label className="mt-6 flex cursor-pointer items-start gap-3 rounded-xl bg-blue-50/60 p-3">
-        <input
-          type="checkbox"
-          required
-          checked={data.consent}
-          onChange={(e) => update("consent", e.target.checked)}
-          className="mt-0.5 h-4 w-4 shrink-0 rounded border-navy-200 text-brand-blue focus:ring-brand-blue"
-        />
-        <span className="text-xs text-navy-700/80">
-          ฉันยินยอมให้ MSB Smart Solutions ติดต่อกลับและประมวลผลข้อมูลตามที่ระบุไว้ใน
-          <a href="#" className="font-semibold text-brand-blue hover:underline">
-            {" "}
-            Privacy Policy
-          </a>
-        </span>
-      </label>
-
-      <button
-        type="submit"
-        disabled={status === "loading" || !data.consent}
-        className="btn-primary mt-6 w-full disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-      >
-        {status === "loading" ? (
-          <>
-            <Loader2 className="h-4 w-4 animate-spin" />
-            Submitting…
-          </>
-        ) : (
-          <>
-            Submit registration
-            <ArrowRight className="h-4 w-4" />
-          </>
-        )}
-      </button>
     </form>
   );
 }
 
 /* ============ Sub fields ============ */
+
+function SectionHeader({
+  number,
+  title,
+  subtitle,
+}: {
+  number: number;
+  title: string;
+  subtitle?: string;
+}) {
+  return (
+    <div className="mb-3 flex items-center gap-3">
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan text-[11px] font-extrabold text-white shadow-card">
+        {number}
+      </span>
+      <h3 className="text-base font-bold tracking-tight text-navy-800">
+        {title}
+      </h3>
+      {subtitle && (
+        <span className="ml-auto text-[10px] font-semibold uppercase tracking-[0.18em] text-navy-700/50">
+          {subtitle}
+        </span>
+      )}
+    </div>
+  );
+}
+
 
 function FieldLabel({ children }: { children: React.ReactNode }) {
   return (
