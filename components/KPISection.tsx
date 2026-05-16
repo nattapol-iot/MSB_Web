@@ -1,9 +1,7 @@
 import { TrendingUp } from "lucide-react";
 import { kpis, type KPI } from "@/data/kpis";
 
-function Sparkline({ data }: { data: number[] }) {
-  const w = 80;
-  const h = 24;
+function Sparkline({ data, w = 120, h = 32 }: { data: number[]; w?: number; h?: number }) {
   const max = Math.max(...data);
   const min = Math.min(...data);
   const range = max - min || 1;
@@ -34,24 +32,24 @@ function Sparkline({ data }: { data: number[] }) {
 function KPICard({ kpi }: { kpi: KPI }) {
   const Icon = kpi.icon;
   return (
-    <div className="card-base flex flex-col gap-4 hover:-translate-y-1 hover:shadow-soft">
-      <div className="flex items-center justify-between">
-        <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-blue/10 to-brand-cyan/10 text-brand-blue">
-          <Icon className="h-5 w-5" strokeWidth={2.2} />
-        </span>
-        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-600">
-          <TrendingUp className="h-3 w-3" />
-          {kpi.growth}
-        </span>
-      </div>
-      <div>
-        <div className="text-3xl font-bold tracking-tight text-navy-800">
+    <div className="card-base flex items-center gap-4 !p-4 hover:-translate-y-0.5 hover:shadow-soft">
+      <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-blue to-brand-cyan text-white shadow-card">
+        <Icon className="h-5 w-5" strokeWidth={2.2} />
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="text-[11px] font-medium text-navy-700/60">
+          {kpi.label}
+        </div>
+        <div className="text-xl font-bold leading-tight tracking-tight text-navy-800">
           {kpi.value}
         </div>
-        <div className="mt-1 text-sm text-navy-700/70">{kpi.label}</div>
+        <div className="mt-0.5 inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-600">
+          <TrendingUp className="h-2.5 w-2.5" />
+          {kpi.growth} <span className="text-navy-700/50">vs yesterday</span>
+        </div>
       </div>
-      <div className="mt-auto">
-        <Sparkline data={kpi.spark} />
+      <div className="hidden shrink-0 sm:block">
+        <Sparkline data={kpi.spark} w={70} h={32} />
       </div>
     </div>
   );
@@ -61,16 +59,16 @@ export function KPISection() {
   return (
     <section className="section bg-gradient-to-b from-white via-blue-50/40 to-white">
       <div className="container-page">
-        <div className="mb-12 flex flex-col items-center text-center">
-          <span className="h-eyebrow">Integrated Platform Overview</span>
-          <h2 className="h-section mt-2 max-w-2xl">
-            One platform, real-time visibility
-          </h2>
-          <p className="text-muted mt-3 max-w-2xl text-base sm:text-lg">
-            Live operational metrics across every connected solution.
+        <div className="mb-10 flex flex-col items-start gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <span className="h-eyebrow">Integrated Platform Overview</span>
+            <h2 className="h-section mt-2">One platform, real-time visibility</h2>
+          </div>
+          <p className="text-muted max-w-md text-sm sm:text-right">
+            Live operational metrics across every connected solution, powered by Nexus.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           {kpis.map((k) => (
             <KPICard key={k.id} kpi={k} />
           ))}
