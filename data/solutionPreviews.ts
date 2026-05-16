@@ -4,6 +4,7 @@ import {
   ScanLine,
   Activity,
   Building2,
+  Gauge,
   type LucideIcon,
 } from "lucide-react";
 
@@ -89,6 +90,23 @@ export const solutionPreviews: SolutionPreview[] = [
     ],
     icon: Activity,
     accent: "from-sky-500 to-indigo-500",
+  },
+  {
+    id: "power",
+    title: "Power Visualization Solution",
+    short: "Measure, monitor, and optimize energy usage",
+    description:
+      "Gain real-time visibility into electricity consumption, demand, power quality, and utility costs. Turn energy data into actionable insights for smarter operations and cost reduction.",
+    modules: [
+      "Power Meter Integration",
+      "Real-time Energy Dashboard",
+      "Consumption Analysis",
+      "Power Quality Monitoring",
+      "Cost & Demand Control",
+      "Alerts & Reporting",
+    ],
+    icon: Gauge,
+    accent: "from-amber-500 to-orange-500",
   },
   {
     id: "bms",

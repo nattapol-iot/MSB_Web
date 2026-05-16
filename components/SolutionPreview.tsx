@@ -19,6 +19,10 @@ const solutionImages: Record<string, { src: string; alt: string }> = {
     src: "/images/solutions/iiot-operation.png",
     alt: "Industrial IoT operation showing connected machines, gateways, OEE dashboards, alarms, energy monitoring, and analytics",
   },
+  power: {
+    src: "/images/solutions/power-visualization-operation.png",
+    alt: "Power Visualization Solution showing power meter integration, real-time energy dashboard, consumption analysis, power quality, cost control, alerts, and reporting",
+  },
   bms: {
     src: "/images/solutions/bms-operation.png",
     alt: "Building Management System operation showing HVAC, lighting, energy, alarms, sensors, dashboards, and maintenance monitoring",
