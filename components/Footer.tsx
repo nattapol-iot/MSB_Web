@@ -5,9 +5,10 @@ const linkGroups = [
   {
     title: "Platform",
     links: [
-      { label: "Home", href: "#home" },
-      { label: "Solutions", href: "#solutions" },
-      { label: "Contact", href: "#contact" },
+      { label: "Home", href: "/#home" },
+      { label: "Solutions", href: "/#solutions" },
+      { label: "Register", href: "/register" },
+      { label: "Contact", href: "/#contact" },
     ],
   },
   {

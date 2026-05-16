@@ -20,7 +20,7 @@ export function CTASection() {
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
                 <a
-                  href="#contact"
+                  href="/register"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-navy-800 shadow-soft transition hover:opacity-95"
                 >
                   Request a Demo

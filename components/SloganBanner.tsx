@@ -45,7 +45,7 @@ export function SloganBanner() {
         </div>
 
         <a
-          href="#contact"
+          href="/register"
           className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-navy-800 shadow-soft transition hover:opacity-95"
         >
           Request a Demo

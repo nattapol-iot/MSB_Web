@@ -47,8 +47,14 @@ export function Header() {
             </a>
           ))}
         </nav>
-        <div className="hidden lg:block">
-          <a href="#contact" className="btn-primary">
+        <div className="hidden items-center gap-2 lg:flex">
+          <a
+            href="/register"
+            className="text-sm font-semibold text-navy-700 transition hover:text-brand-blue"
+          >
+            Register
+          </a>
+          <a href="/register" className="btn-primary">
             Request Demo
             <ArrowRight className="h-4 w-4" />
           </a>
@@ -75,7 +81,14 @@ export function Header() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="/register"
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-3 py-2 text-sm font-semibold text-navy-800 hover:bg-navy-50"
+            >
+              Register
+            </a>
+            <a
+              href="/register"
               onClick={() => setOpen(false)}
               className="btn-primary mt-2"
             >
