@@ -1,6 +1,29 @@
+import Image from "next/image";
 import { Check, ArrowRight } from "lucide-react";
 import { solutionPreviews } from "@/data/solutionPreviews";
-import { illustrationById } from "./illustrations/SolutionIllustrations";
+
+const solutionImages: Record<string, { src: string; alt: string }> = {
+  wms: {
+    src: "/images/solutions/wms-operation.png",
+    alt: "Warehouse Management System operation showing receiving, inventory, picking, packing, and shipping workflows",
+  },
+  wcs: {
+    src: "/images/solutions/wcs-operation.png",
+    alt: "Warehouse Control System operation showing conveyors, sortation, shuttles, AGV and AMR orchestration",
+  },
+  traceability: {
+    src: "/images/solutions/traceability-operation.png",
+    alt: "Traceability System operation showing barcode scanning, WIP tracking, quality checks, labeling, and shipment trace records",
+  },
+  iiot: {
+    src: "/images/solutions/iiot-operation.png",
+    alt: "Industrial IoT operation showing connected machines, gateways, OEE dashboards, alarms, energy monitoring, and analytics",
+  },
+  bms: {
+    src: "/images/solutions/bms-operation.png",
+    alt: "Building Management System operation showing HVAC, lighting, energy, alarms, sensors, dashboards, and maintenance monitoring",
+  },
+};
 
 export function SolutionPreview() {
   return (
@@ -62,10 +85,11 @@ export function SolutionPreview() {
               </div>
 
               <div className={reverse ? "lg:order-1" : ""}>
-                {(() => {
-                  const Illu = illustrationById[s.id];
-                  return Illu ? <Illu /> : <PreviewMock solution={s} reverse={false} />;
-                })()}
+                <SolutionOperationImage
+                  accent={s.accent}
+                  image={solutionImages[s.id]}
+                  title={s.title}
+                />
               </div>
             </div>
           );
@@ -75,83 +99,33 @@ export function SolutionPreview() {
   );
 }
 
-function PreviewMock({
-  solution,
-  reverse,
+function SolutionOperationImage({
+  accent,
+  image,
+  title,
 }: {
-  solution: (typeof solutionPreviews)[number];
-  reverse: boolean;
+  accent: string;
+  image?: { src: string; alt: string };
+  title: string;
 }) {
-  const Icon = solution.icon;
+  if (!image) return null;
+
   return (
-    <div className={`${reverse ? "lg:order-1" : ""}`}>
-      <div className="relative">
-        <div
-          className={`absolute -inset-6 rounded-3xl bg-gradient-to-br ${solution.accent} opacity-15 blur-2xl`}
+    <div className="relative">
+      <div
+        className={`absolute -inset-6 rounded-3xl bg-gradient-to-br ${accent} opacity-15 blur-2xl`}
+      />
+      <div className="relative aspect-[16/9] overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-soft">
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          sizes="(min-width: 1024px) 46vw, 100vw"
+          className="object-cover object-center"
         />
-        <div className="relative overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-soft">
-          {/* Window bar */}
-          <div className="flex items-center gap-1.5 border-b border-navy-100 bg-navy-50/60 px-4 py-3">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-300" />
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-300" />
-            <span className="ml-3 text-[11px] font-semibold text-navy-700/60">
-              nexus / {solution.id}
-            </span>
-          </div>
-          <div className="grid grid-cols-3 gap-3 p-5">
-            <div className="col-span-2 rounded-xl border border-navy-100 bg-gradient-to-br from-blue-50 to-cyan-50 p-4">
-              <div className="flex items-center gap-2">
-                <span
-                  className={`inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br ${solution.accent} text-white`}
-                >
-                  <Icon className="h-4 w-4" />
-                </span>
-                <span className="text-xs font-semibold text-navy-800">
-                  {solution.short}
-                </span>
-              </div>
-              <div className="mt-4 grid grid-cols-7 items-end gap-1.5">
-                {[40, 55, 35, 70, 50, 80, 65].map((h, i) => (
-                  <div
-                    key={i}
-                    className="rounded-t-md bg-gradient-to-t from-brand-blue to-brand-cyan"
-                    style={{ height: `${h}px` }}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="flex flex-col gap-3">
-              {solution.modules.slice(0, 3).map((m) => (
-                <div
-                  key={m}
-                  className="rounded-lg border border-navy-100 bg-white p-2.5 text-[11px] font-medium text-navy-800 shadow-sm"
-                >
-                  {m}
-                </div>
-              ))}
-            </div>
-            <div className="col-span-3 grid grid-cols-3 gap-3">
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="rounded-xl border border-navy-100 bg-white p-3"
-                >
-                  <div className="text-[10px] font-semibold uppercase tracking-wider text-navy-700/50">
-                    Metric {i}
-                  </div>
-                  <div className="mt-1 text-lg font-bold text-navy-800">
-                    {(82 + i * 3).toFixed(1)}%
-                  </div>
-                  <div className="mt-2 h-1.5 rounded-full bg-navy-100">
-                    <div
-                      className={`h-full rounded-full bg-gradient-to-r ${solution.accent}`}
-                      style={{ width: `${60 + i * 10}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-white/85 via-white/35 to-transparent p-5">
+          <div className="inline-flex rounded-full border border-navy-100 bg-white/90 px-3 py-1 text-xs font-semibold text-navy-800 shadow-sm backdrop-blur">
+            {title}
           </div>
         </div>
       </div>

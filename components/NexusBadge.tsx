@@ -1,4 +1,4 @@
-import { Hexagon } from "lucide-react";
+import Image from "next/image";
 
 export function NexusBadge({
   variant = "light",
@@ -17,11 +17,17 @@ export function NexusBadge({
       }`}
     >
       <span
-        className={`inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-blue to-brand-cyan ${
-          subtle ? "" : "shadow-glow"
+        className={`inline-flex h-10 w-[118px] items-center justify-center rounded-xl bg-white px-2 ${
+          subtle ? "" : "shadow-card"
         }`}
       >
-        <Hexagon className="h-4.5 w-4.5 text-white" strokeWidth={2.5} />
+        <Image
+          src="/images/brand/nexus-logo.png"
+          alt="Nexus logo"
+          width={174}
+          height={64}
+          className="h-7 w-auto object-contain"
+        />
       </span>
       <span className="flex flex-col leading-tight">
         <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-blue">

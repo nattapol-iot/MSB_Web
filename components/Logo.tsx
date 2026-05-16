@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function Logo({
   compact = false,
   variant = "light",
@@ -5,28 +7,24 @@ export function Logo({
   compact?: boolean;
   variant?: "light" | "dark";
 }) {
-  const dark = variant === "dark";
+  const logoSrc = compact
+    ? "/images/brand/msb-logo-mark.png"
+    : "/images/brand/msb-logo-horizontal.png";
+
   return (
-    <a href="#home" className="flex items-center gap-2.5">
-      <LogoMark />
-      {!compact && (
-        <span className="flex flex-col leading-tight">
-          <span
-            className={`text-sm font-extrabold tracking-tight ${
-              dark ? "text-white" : "text-navy-800"
-            }`}
-          >
-            MSB
-          </span>
-          <span
-            className={`text-[9px] font-semibold uppercase tracking-[0.28em] ${
-              dark ? "text-white/70" : "text-navy-700/70"
-            }`}
-          >
-            Smart Solutions
-          </span>
-        </span>
-      )}
+    <a
+      href="#home"
+      className={`inline-flex items-center ${variant === "dark" ? "rounded-xl bg-white/95 p-1.5" : ""}`}
+      aria-label="MSB Smart Solutions home"
+    >
+      <Image
+        src={logoSrc}
+        alt="MSB Smart Solutions logo"
+        width={compact ? 54 : 186}
+        height={compact ? 48 : 60}
+        priority={!compact}
+        className={compact ? "h-10 w-auto" : "h-10 w-auto sm:h-11"}
+      />
     </a>
   );
 }
