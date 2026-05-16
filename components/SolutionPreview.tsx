@@ -1,5 +1,6 @@
 import { Check, ArrowRight } from "lucide-react";
 import { solutionPreviews } from "@/data/solutionPreviews";
+import { illustrationById } from "./illustrations/SolutionIllustrations";
 
 export function SolutionPreview() {
   return (
@@ -60,7 +61,12 @@ export function SolutionPreview() {
                 </div>
               </div>
 
-              <PreviewMock solution={s} reverse={reverse} />
+              <div className={reverse ? "lg:order-1" : ""}>
+                {(() => {
+                  const Illu = illustrationById[s.id];
+                  return Illu ? <Illu /> : <PreviewMock solution={s} reverse={false} />;
+                })()}
+              </div>
             </div>
           );
         })}

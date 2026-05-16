@@ -1,6 +1,6 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import { NexusBadge } from "./NexusBadge";
-import { EcosystemVisual } from "./EcosystemVisual";
+import { IsometricHero } from "./illustrations/IsometricHero";
 
 export function HeroSection() {
   return (
@@ -36,7 +36,7 @@ export function HeroSection() {
           </div>
         </div>
         <div className="flex justify-center lg:justify-end">
-          <EcosystemVisual />
+          <IsometricHero />
         </div>
       </div>
     </section>
